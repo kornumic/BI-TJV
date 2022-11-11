@@ -1,4 +1,7 @@
 package cz.cvut.fit.tjv.semestral.domain;
 
-public class DomainEntity {
+import java.io.Serializable;
+
+public interface DomainEntity<ID> extends Serializable {
+    ID getId();
 }
