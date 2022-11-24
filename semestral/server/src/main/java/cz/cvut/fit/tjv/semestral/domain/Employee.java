@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
@@ -15,7 +16,7 @@ public class Employee implements DomainEntity<Long>{
     private Long id;
     private String name;
     private Long salary;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String address;
     private Long skill;
 
@@ -28,7 +29,7 @@ public class Employee implements DomainEntity<Long>{
         this.id = Objects.requireNonNull(id);
     }
 
-    public Employee(Long id, String name, Long salary, Date dateOfBirth, String address, Long skill) {
+    public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill) {
         this(id);
         this.name = name;
         this.salary = salary;
@@ -59,10 +60,10 @@ public class Employee implements DomainEntity<Long>{
     public void setSalary(Long salary) {
         this.salary = salary;
     }
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     public String getAddress() {
