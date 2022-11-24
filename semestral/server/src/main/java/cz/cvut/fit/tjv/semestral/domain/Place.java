@@ -2,6 +2,7 @@ package cz.cvut.fit.tjv.semestral.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Place implements DomainEntity<Long>{
@@ -12,7 +13,7 @@ public class Place implements DomainEntity<Long>{
 
     public Place(){}
     public Place(Long id) {
-        this.id = id;
+        this.id = Objects.requireNonNull(id);
     }
 
     public Place(Long id, String address, Boolean state) {
@@ -39,5 +40,18 @@ public class Place implements DomainEntity<Long>{
     }
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Place place = (Place) o;
+        return Objects.equals(id, place.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

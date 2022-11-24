@@ -9,5 +9,4 @@ import java.util.Collection;
 
 @Repository
 public interface EmployeeJpaRepository extends JpaRepository<Employee, Long> {
-
 }

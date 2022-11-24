@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Job implements DomainEntity<Long>{
@@ -16,7 +17,7 @@ public class Job implements DomainEntity<Long>{
 
     public Job(){}
     public Job(Long id) {
-        this.id = id;
+        this.id = Objects.requireNonNull(id);
     }
 
     public Job(Long id, String name, Long difficulty, Long time, Boolean finished) {
@@ -57,5 +58,18 @@ public class Job implements DomainEntity<Long>{
     }
     public void setFinished(Boolean finished) {
         this.finished = finished;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return id.equals(job.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
