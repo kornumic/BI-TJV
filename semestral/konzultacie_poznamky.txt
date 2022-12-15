@@ -1,0 +1,66 @@
+dependence injection - cez konstruktor
+ResponseEntity.of(returns Optional) - vrati 404 ked je prazdny
+
+
+MODEL
+    ANOTACIE 
+@Column(nullable=false) - v databaze vynuti not null; (unique=true) - zaisti unique
+@JoinColumn(nullable=false) - stlpecek bude odvodeny od cudzieho kluca
+@OneToMany (mappedBy = "cim spajat")
+@ManyToOne  v Post - jeden autor moze vytvorit viacero postov
+@Entity - entita v databaze
+@Id - zaistene not null v databaze
+@ManyToMany(mappedBy = "likes") - aby bola jedna obojstranna tabulka
+                                - vlastnikom je ta strana ktora nema mappedBy
+
+DAO
+    ANOTACIE
+@Repository             interface ... extends CrudRepository
+    -ak spravne zostavim nazov doplni mi spravne dotaz
+ak nevyhovuje dam:
+@Query("SELECT x FROM...") <- JPQL, anotujem parameter pomocou @Param("p") a do query vlozim pomocou :p
+
+SERVICE 
+- v nej CRUD + nejaka kontrola (mazeme nieco co neexistuje, vytvarame nieco co uz existuje)
+- kontroluje zle vstupy
+    ANOTACIE
+@Service - nie abstraktne triedy (Spring z toho vytvara instancie)
+@Transactional - cokolvek sa s objektami v ramci kontextu deje sa automaticky zapisuje do databaze, zapisujeme do vlastnika
+
+API
+    ANOTACIE
+@PostMapping
+@GetMapping ("/{id}")
+@PutMapping ("/{id}")
+@DeleteMapping("/{id}")
+
+@RestController
+@RequestMapping("/users")
+
+@ResponseBody
+@PathVariable
+@RequestBody
+@ApiResponses({
+        @ApiResponse(responseCode = "200"),
+        @ApiResponse(responseCode = "406", content = @Content, description = "description")})
+
+application.properties:
+    server.servlet.context-path=/api/v1
+    springdoc.default-produces-media-type=application/json
+build.gradle
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.13'      -OPENAPI (localhost:8080/api/v1/swagger-ui/index.html)
+
+
+
+    CONTROLLER
+
+EXCEPTIONS
+Exception Handler - vsetky vynimky (aj z kniznic) namapujeme na nejaky status code
+ResponseStatusException(HttpStatus.NOT_FOUND/BAD_REQUEST, "message")
+
+JPA
+@JoinTable(
+    name = "likes"
+    joinColumns = @JoinColumn(name = "post_id")
+    inverseJoinColumn = @JoinColumn(name = "username")
+)
