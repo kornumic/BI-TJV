@@ -2,9 +2,7 @@ package cz.cvut.fit.tjv.semestral.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
@@ -13,6 +11,7 @@ import java.util.Objects;
 @Entity
 public class Employee implements DomainEntity<Long>{
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private Long salary;
@@ -26,13 +25,13 @@ public class Employee implements DomainEntity<Long>{
     public Employee() {}
 
     public Employee(Long id) {
-        this.id = Objects.requireNonNull(id);
+        this.id = id;
     }
 
     public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill) {
         this(id);
-        this.name = name;
-        this.salary = salary;
+        this.name = Objects.requireNonNull(name);
+        this.salary = Objects.requireNonNull(salary);
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.skill = skill;

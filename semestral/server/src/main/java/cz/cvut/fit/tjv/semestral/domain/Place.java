@@ -1,12 +1,15 @@
 package cz.cvut.fit.tjv.semestral.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
 public class Place implements DomainEntity<Long>{
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String address;
     private Boolean state;

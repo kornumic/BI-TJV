@@ -15,8 +15,6 @@ public abstract class AbstractCrudService<E extends DomainEntity<K>, K>  {
     }
 
     public E create(E entity) throws EntityStateException {
-        if(repository.existsById(entity.getId()))
-            throw new EntityStateException(entity);
         return repository.save(entity);
     }
 

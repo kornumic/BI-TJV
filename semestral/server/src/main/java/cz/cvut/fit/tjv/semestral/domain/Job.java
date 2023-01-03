@@ -1,20 +1,21 @@
 package cz.cvut.fit.tjv.semestral.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Job implements DomainEntity<Long>{
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private Long difficulty;
     private Long time;
     private Boolean finished;
 
+    @ManyToMany(mappedBy = "myJobs")
+    private Collection<Employee> assignedEmployees;
     public Job(){}
     public Job(Long id) {
         this.id = Objects.requireNonNull(id);
@@ -24,7 +25,7 @@ public class Job implements DomainEntity<Long>{
         this(id);
         this.name = name;
         this.difficulty = difficulty;
-        this.time = time;
+        this.time = Objects.requireNonNull(time);
         this.finished = finished;
     }
 
