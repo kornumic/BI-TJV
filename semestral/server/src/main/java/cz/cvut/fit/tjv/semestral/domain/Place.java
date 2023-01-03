@@ -16,12 +16,12 @@ public class Place implements DomainEntity<Long>{
 
     public Place(){}
     public Place(Long id) {
-        this.id = Objects.requireNonNull(id);
+        this.id = id;
     }
 
     public Place(Long id, String address, Boolean state) {
         this(id);
-        this.address = address;
+        this.address = Objects.requireNonNull(address);
         this.state = state;
     }
 

@@ -18,13 +18,13 @@ public class Job implements DomainEntity<Long>{
     private Collection<Employee> assignedEmployees;
     public Job(){}
     public Job(Long id) {
-        this.id = Objects.requireNonNull(id);
+        this.id = id;
     }
 
     public Job(Long id, String name, Long difficulty, Long time, Boolean finished) {
         this(id);
-        this.name = name;
-        this.difficulty = difficulty;
+        this.name = Objects.requireNonNull(name);
+        this.difficulty = Objects.requireNonNull(difficulty);
         this.time = Objects.requireNonNull(time);
         this.finished = finished;
     }

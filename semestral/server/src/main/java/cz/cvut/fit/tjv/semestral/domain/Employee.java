@@ -34,7 +34,7 @@ public class Employee implements DomainEntity<Long>{
         this.salary = Objects.requireNonNull(salary);
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.skill = skill;
+        this.skill = Objects.requireNonNull(skill);
     }
 
     public Collection<Job> returnMyJobs(){
