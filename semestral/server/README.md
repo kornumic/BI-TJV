@@ -9,7 +9,7 @@ Priradenie činnosti zamestnancovi.
 
 
     Komplexný dotaz:
-Dotaz - vyber vsetkých zamestnancov, ktorí nemajú priradené činnosti spolu dosahujúce minimálny počet odpracovaných hodín 
+Dotaz - vyber vsetkých zamestnancov, ktorí nemajú priradené činnosti v súčte dosahujúce maximálny povolený počet odpracovaných hodín (160h) 
 
     CRUD operácie:
 Dotaz - pridaj zamestnanca
