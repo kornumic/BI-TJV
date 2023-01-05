@@ -9,6 +9,8 @@ public class Job implements DomainEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Column(unique = true)
     private String name;
     private Long difficulty;
     private Long time;

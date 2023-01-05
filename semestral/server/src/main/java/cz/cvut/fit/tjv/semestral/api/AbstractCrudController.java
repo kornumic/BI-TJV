@@ -2,6 +2,7 @@ package cz.cvut.fit.tjv.semestral.api;
 
 import cz.cvut.fit.tjv.semestral.api.model.AbstractEntityDto;
 import cz.cvut.fit.tjv.semestral.business.AbstractCrudService;
+import cz.cvut.fit.tjv.semestral.business.EntityStateException;
 import cz.cvut.fit.tjv.semestral.domain.DomainEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,26 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
     }
 
     @PostMapping
-    public D create (@RequestBody D e) {
-        return toDtoConverter.apply(service.create(toEntityConverter.apply(e)));
+    public ResponseEntity<Object> create (@RequestBody D e) {
+        try{
+            return ResponseEntity.ok(toDtoConverter.apply(service.create(toEntityConverter.apply(e))));
+        }
+        catch (EntityStateException exc){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 
-    @GetMapping
     public Collection<D> readAll() {
         return service.readAll().stream().map(toDtoConverter).toList();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<D> readOne(@PathVariable ID id) {
+        var res = service.readById(id);
+        if (res.isPresent())
+            return ResponseEntity.ok(toDtoConverter.apply(res.get()));
+        else
+            return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
@@ -50,4 +64,5 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
 
         return ResponseEntity.notFound().build();
     }
+
 }

@@ -9,6 +9,7 @@ public class Place implements DomainEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(unique = true)
     private String address;
     private Boolean state;
 

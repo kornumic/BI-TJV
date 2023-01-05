@@ -14,13 +14,14 @@ public abstract class AbstractCrudService<E extends DomainEntity<K>, K>  {
         this.repository = repository;
     }
 
-    public E create(E entity) throws EntityStateException {
+    public E create(E entity) throws EntityStateException{
         return repository.save(entity);
     }
 
     public Collection<E> readAll(){
         return (Collection<E>) repository.findAll();
     }
+
 
     public E update(E entity) throws EntityStateException {
         if (repository.existsById(entity.getId()))
