@@ -37,6 +37,16 @@ public class Employee implements DomainEntity<Long>{
         this.skill = Objects.requireNonNull(skill);
     }
 
+    public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill, Collection<Job> myJobs) {
+        this(id);
+        this.name = Objects.requireNonNull(name);
+        this.salary = Objects.requireNonNull(salary);
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.skill = Objects.requireNonNull(skill);
+        this.myJobs = myJobs;
+    }
+
     public Collection<Job> returnMyJobs(){
         return myJobs;
     }
@@ -84,6 +94,14 @@ public class Employee implements DomainEntity<Long>{
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
         return Objects.equals(id, employee.id);
+    }
+
+    public Collection<Job> getMyJobs() {
+        return myJobs;
+    }
+
+    public void setMyJobs(Collection<Job> myJobs) {
+        this.myJobs = myJobs;
     }
 
     @Override

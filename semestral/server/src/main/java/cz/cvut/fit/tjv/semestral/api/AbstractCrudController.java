@@ -31,6 +31,9 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
         catch (EntityStateException exc){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
+        catch (NullPointerException exc){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     public Collection<D> readAll() {
@@ -40,10 +43,7 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
     @GetMapping("/{id}")
     public ResponseEntity<D> readOne(@PathVariable ID id) {
         var res = service.readById(id);
-        if (res.isPresent())
-            return ResponseEntity.ok(toDtoConverter.apply(res.get()));
-        else
-            return ResponseEntity.notFound().build();
+        return res.map(e -> ResponseEntity.ok(toDtoConverter.apply(e))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
@@ -52,8 +52,13 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
             return ResponseEntity.notFound().build();
         }
         e.id = id;
-        var res = toDtoConverter.apply(service.update(toEntityConverter.apply(e)));
-        return ResponseEntity.ok(res);
+        try{
+            var res = toDtoConverter.apply(service.update(toEntityConverter.apply(e)));
+            return ResponseEntity.ok(res);
+        }
+        catch(NullPointerException exc){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -61,7 +66,6 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
         if(service.deleteById(id)){
             return ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.notFound().build();
     }
 

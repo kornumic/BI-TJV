@@ -21,4 +21,5 @@ public class JobService extends AbstractCrudService<Job, Long>{
         }
         return super.create(entity);
     }
+
 }

@@ -9,7 +9,7 @@ import java.util.function.Function;
 @Component
 public class JobToEntityConverter implements Function<JobDto, Job> {
     @Override
-    public Job apply(JobDto jobDto) {
+    public Job apply(JobDto jobDto) throws NullPointerException{
         return new Job(jobDto.id,
                        jobDto.name,
                        jobDto.difficulty,

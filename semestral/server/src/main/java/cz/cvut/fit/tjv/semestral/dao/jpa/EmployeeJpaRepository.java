@@ -9,12 +9,13 @@ import java.util.Collection;
 
 @Repository
 public interface EmployeeJpaRepository extends JpaRepository<Employee, Long> {
-        @Query(nativeQuery = true, value = "select * from (select assigned_employees_id, sum(time) as time_total from (\n" +
-                "       select assigned_employees_id, j.time from employee_my_jobs e\n" +
-                "       join job j on (j.id = e.my_jobs_id)\n" +
-                "   )R1\n" +
-                "   group by assigned_employees_id\n" +
-                "   having (sum(time) <= 160))R0\n" +
-                "   join employee on (employee.id = R0.assigned_employees_id)")
+    @Query(nativeQuery = true,
+           value =  "select * from (select assigned_employees_id, sum(time) as time_total from (\n" +
+                    "       select assigned_employees_id, j.time from employee_my_jobs e\n" +
+                    "       join job j on (j.id = e.my_jobs_id)\n" +
+                    "   )R1\n" +
+                    "   group by assigned_employees_id\n" +
+                    "   having (sum(time) <= 160))R0\n" +
+                    "   join employee on (employee.id = R0.assigned_employees_id)")
     Collection<Employee> findAllFree(Long limit);
 }
