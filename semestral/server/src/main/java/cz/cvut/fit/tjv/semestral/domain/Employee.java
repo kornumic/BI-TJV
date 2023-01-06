@@ -38,12 +38,7 @@ public class Employee implements DomainEntity<Long>{
     }
 
     public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill, Collection<Job> myJobs) {
-        this(id);
-        this.name = Objects.requireNonNull(name);
-        this.salary = Objects.requireNonNull(salary);
-        this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.skill = Objects.requireNonNull(skill);
+        this(id, name, salary, dateOfBirth, address, skill);
         this.myJobs = myJobs;
     }
 

@@ -13,7 +13,8 @@ public class Place implements DomainEntity<Long>{
     private String address;
     private Boolean state;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany
+    @JoinColumn(name = "jobs_in_place")
     private Collection<Job> jobsInPlace;
 
     public Place(){}
@@ -25,6 +26,11 @@ public class Place implements DomainEntity<Long>{
         this(id);
         this.address = Objects.requireNonNull(address);
         this.state = state;
+    }
+
+    public Place(Long id, String address, Boolean state, Collection<Job> jobsInPlace) {
+        this(id, address, state);
+        this.jobsInPlace = jobsInPlace;
     }
 
     @Override
@@ -45,6 +51,14 @@ public class Place implements DomainEntity<Long>{
     }
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    public Collection<Job> getJobsInPlace() {
+        return jobsInPlace;
+    }
+
+    public void setJobsInPlace(Collection<Job> jobsInPlace) {
+        this.jobsInPlace = jobsInPlace;
     }
 
     @Override

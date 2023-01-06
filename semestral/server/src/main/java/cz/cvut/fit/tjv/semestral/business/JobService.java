@@ -22,4 +22,8 @@ public class JobService extends AbstractCrudService<Job, Long>{
         return super.create(entity);
     }
 
+    public boolean checkEntityValid(Job job) {
+        var jobFromDb = readById(job.getId());
+        return jobFromDb.isPresent() && job.equals(jobFromDb.get());
+    }
 }

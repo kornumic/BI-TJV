@@ -59,6 +59,9 @@ public abstract class AbstractCrudController <E extends DomainEntity<ID>, D exte
         catch(NullPointerException exc){
             return ResponseEntity.badRequest().build();
         }
+        catch(EntityStateException exc){
+            return ResponseEntity.unprocessableEntity().build();
+        }
     }
 
     @DeleteMapping("/{id}")
