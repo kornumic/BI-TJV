@@ -40,6 +40,6 @@ public class EmployeeService extends AbstractCrudService<Employee, Long> {
     }
 
     public Collection<Employee> readAllAssignable() {
-        return ((EmployeeJpaRepository) repository).findAllFree(160L);
+        return ((EmployeeJpaRepository) repository).findAllFree(/*160L*/);
     }
 }
