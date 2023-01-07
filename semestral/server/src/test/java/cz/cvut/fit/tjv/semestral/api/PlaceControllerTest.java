@@ -4,6 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AbstractCrudControllerTest {
+class PlaceControllerTest {
 
+    @Test
+    void create() {
+    }
+
+    @Test
+    void readAll() {
+    }
 }

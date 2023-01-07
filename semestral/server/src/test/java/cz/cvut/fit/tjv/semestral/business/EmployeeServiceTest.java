@@ -29,7 +29,6 @@ class EmployeeServiceTest {
     @MockBean
     private JobService jobService;
 
-    ArrayList<Job> jobArray = new ArrayList<Job>(2);
     Job jobValid = new Job(1L, "jobValid", 3L, 50L, false);
     Job jobInvalid = new Job(2L, "jobInvalid", 3L, 50L, false);
 
