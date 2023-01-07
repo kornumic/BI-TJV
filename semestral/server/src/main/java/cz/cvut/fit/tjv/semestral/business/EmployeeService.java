@@ -24,7 +24,7 @@ public class EmployeeService extends AbstractCrudService<Employee, Long> {
         var jobs = entity.getMyJobs();
         for(Job job : jobs){
             if(!jobService.checkEntityValid(job))
-                throw new EntityStateException("Job \"" + job.getName() + "\" does not is invalid");
+                throw new EntityStateException("Job \"" + job.getName() + "\" is not valid");
         }
         return repository.save(entity);
     }
@@ -40,6 +40,6 @@ public class EmployeeService extends AbstractCrudService<Employee, Long> {
     }
 
     public Collection<Employee> readAllAssignable() {
-        return ((EmployeeJpaRepository) repository).findAllFree(/*160L*/);
+        return ((EmployeeJpaRepository) repository).findAllFree(160L);
     }
 }

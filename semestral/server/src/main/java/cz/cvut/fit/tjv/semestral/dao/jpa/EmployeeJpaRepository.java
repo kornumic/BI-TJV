@@ -16,7 +16,7 @@ public interface EmployeeJpaRepository extends JpaRepository<Employee, Long> {
                     "       join job j on (j.id = e.my_jobs_id)\n" +
                     "   )R1\n" +
                     "   group by assigned_employees_id\n" +
-                    "   having (sum(time) <= 160 ))R0\n" +
+                    "   having (sum(time) <= :limit ))R0\n" +
                     "   join employee on (employee.id = R0.assigned_employees_id)")
-    Collection<Employee> findAllFree(/*@Param("limit") Long limit*/);
+    Collection<Employee> findAllFree(@Param("limit") Long limit);
 }

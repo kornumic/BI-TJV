@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
@@ -40,6 +41,12 @@ public class Employee implements DomainEntity<Long>{
     public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill, Collection<Job> myJobs) {
         this(id, name, salary, dateOfBirth, address, skill);
         this.myJobs = myJobs;
+    }
+
+    public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill, Job myJob) {
+        this(id, name, salary, dateOfBirth, address, skill);
+        this.myJobs = new ArrayList<>();
+        this.myJobs.add(myJob);
     }
 
     public Collection<Job> returnMyJobs(){

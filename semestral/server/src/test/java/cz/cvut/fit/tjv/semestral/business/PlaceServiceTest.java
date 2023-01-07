@@ -4,21 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JobServiceTest {
+class PlaceServiceTest {
 
     @Test
     void create() {
     }
 
     @Test
-    void checkEntityValid() {
-    }
-
-    @Test
-    void testCreate() {
-    }
-
-    @Test
-    void testCheckEntityValid() {
+    void update() {
     }
 }
