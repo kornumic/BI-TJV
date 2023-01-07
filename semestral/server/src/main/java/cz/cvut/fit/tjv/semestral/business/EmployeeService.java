@@ -33,7 +33,7 @@ public class EmployeeService extends AbstractCrudService<Employee, Long> {
         var jobs = entity.getMyJobs();
         for(Job job : jobs){
             if(!jobService.checkEntityValid(job))
-                throw new EntityStateException("Job \"" + job.getName() + "\" is invalid");
+                throw new EntityStateException("Job \"" + job.getName() + "\" is not valid");
         }
 
         return super.update(entity);

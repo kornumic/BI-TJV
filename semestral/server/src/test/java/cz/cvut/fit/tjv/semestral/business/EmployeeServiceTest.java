@@ -33,14 +33,17 @@ class EmployeeServiceTest {
     Job jobValid = new Job(1L, "jobValid", 3L, 50L, false);
     Job jobInvalid = new Job(2L, "jobInvalid", 3L, 50L, false);
 
-    Employee employeeToAdd = new Employee(null, "employee1", 500L, null, "address1", 3L, jobValid);
-    Employee employeeNotToAdd = new Employee(null, "employee2", 400L, null, "address2", 4L, jobInvalid);
+    Employee employeeToAdd = new Employee(1L, "employee1", 500L, null, "address1", 3L, jobValid);
+    Employee employeeNotToAdd = new Employee(2L, "employee2", 400L, null, "address2", 4L, jobInvalid);
 
 
     @BeforeEach
     void setUp(){
         Mockito.when(employeeRepository.save(employeeToAdd)).thenReturn(Optional.of(employeeToAdd).get());
         Mockito.when(employeeRepository.save(employeeNotToAdd)).thenReturn(Optional.of(employeeNotToAdd).get());
+
+        Mockito.when(employeeRepository.existsById(employeeToAdd.getId())).thenReturn(true);
+        Mockito.when(employeeRepository.existsById(employeeNotToAdd.getId())).thenReturn(false);
 
         Mockito.when(jobService.checkEntityValid(jobValid)).thenReturn(true);
         Mockito.when(jobService.checkEntityValid(jobInvalid)).thenReturn(false);
@@ -59,10 +62,15 @@ class EmployeeServiceTest {
 
 
     @Test
-    void update() {
+    void updateUpdated() {
+        employeeService.update(employeeToAdd);
+        Mockito.verify(employeeRepository, Mockito.times(1)).save(employeeToAdd);
+        Mockito.verify(employeeRepository, Mockito.times(1)).existsById(employeeToAdd.getId());
+
     }
 
     @Test
-    void readAllAssignable() {
+    void updateNotUpdated() {
+        Assertions.assertThrows(EntityStateException.class, () -> employeeService.update(employeeNotToAdd));
     }
 }
