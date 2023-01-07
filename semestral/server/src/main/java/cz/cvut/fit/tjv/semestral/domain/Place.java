@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.semestral.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -31,6 +32,12 @@ public class Place implements DomainEntity<Long>{
     public Place(Long id, String address, Boolean state, Collection<Job> jobsInPlace) {
         this(id, address, state);
         this.jobsInPlace = jobsInPlace;
+    }
+
+    public Place(Long id, String address, Boolean state, Job myJob) {
+        this(id, address, state);
+        this.jobsInPlace = new ArrayList<>();
+        this.jobsInPlace.add(myJob);
     }
 
     @Override
