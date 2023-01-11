@@ -1,0 +1,121 @@
+/*p{*/
+/*    margin-left: 50px;*/
+/*}*/
+
+h2{
+    margin-left: 50px;
+}
+.btn-primary{
+/*background: #68b474;*/
+/*background: #ffb040;*/
+    background-color: seagreen;
+    border: lightgray;
+    color: white;
+    box-shadow: 0px 1px 5px lightgrey;
+    min-width: 100px;
+}
+.btn-primary:hover{
+    background-color: darkseagreen;
+}
+
+.btn-secondary{
+    background-color: seagreen;
+    border: lightgray;
+    color: white;
+    box-shadow: 0px 1px 5px lightgrey;
+}
+.edit{
+    float: left;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.table-block{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+.line{
+/*background: #B6E4A9;*/
+/*background: #E9F5E7;*/
+background: #F0FDF0;
+}
+.div-top{
+    background: #68b474;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 7px lightgrey;
+}
+.h1-left{
+    text-align: left;
+    margin-left: 30px;
+    padding: 20px;
+}
+.float-jobs-container {
+    border: none;
+    padding: 20px;
+}
+.float-jobs-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 7px;
+}
+.my-jobs{
+    width: 90%;
+
+    padding: 10px;
+}
+
+.alert-danger{
+    text-align: center;
+    margin: auto;
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.alert-success{
+    text-align: center;
+    margin: auto;
+    padding-bottom: 10px;
+    width: 90%
+}
+
+.form{
+    border: 1px solid lightgrey;
+    border-radius: 7px;
+    margin: auto;
+    width: 50%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form-line{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.side-buttons{
+    /*margin: 10px;*/
+    padding: 40px;
+}
+
+.right-button{
+    padding-top: 50px;
+    float: right;
+}
+
+
+.left-button{
+    padding-top: 50px;
+    float: left;
+}
+.button{
+    margin: 10px;
+    padding: 20px;
+}

@@ -1,14 +1,51 @@
 package cz.cvut.fit.tjv.semestral.client.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class EmployeeModel {
-    private Long id;
-    private String name;
-    private Long salary;
-    private LocalDate dateOfBirth;
-    private String address;
-    private Long skill;
+    public Long id;
+    public String name;
+    public Long salary;
+    public LocalDate dateOfBirth;
+    public String address;
+    public Long skill;
+    public Boolean error;
+    public String message;
+    public ArrayList<JobModel> myJobs;
+
+    public EmployeeModel() {
+    }
+    public EmployeeModel(Boolean error, String message) {
+        this.error = error;
+        this.message = message;
+    }
+
+    public ArrayList<JobModel> getMyJobs() {
+        return myJobs;
+    }
+
+    public void setMyJobs(ArrayList<JobModel> myJobs) {
+        this.myJobs = myJobs;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Boolean getError() {
+        return error;
+    }
+
+    public void setError(Boolean error) {
+        this.error = error;
+    }
 
     public Long getId() {
         return id;
