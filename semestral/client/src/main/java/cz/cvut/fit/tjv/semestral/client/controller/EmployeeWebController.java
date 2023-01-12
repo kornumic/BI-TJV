@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -50,16 +51,17 @@ public class EmployeeWebController {
 
     @GetMapping("/employees/{id}/edit")
     public String editEmployeeGet(Model model, @PathVariable("id") Long id) {
-        //EmployeeModel employee = employeeClient.fetchOneEmployee(id);
+        Mono<EmployeeModel> employee = employeeClient.fetchOneEmployee(id);
 //        model.addAttribute("employeeModel", employeeClient.fetchOneEmployee(id));
-        model.addAttribute(new EmployeeModel());
+//        model.addAttribute(new EmployeeModel());
+        model.addAttribute("employee", employee);
         return "employeeEdit";
     }
 
     @PutMapping("/employees/{id}/edit")
-    public String editEmployeeSubmit(Model model, @ModelAttribute EmployeeModel employeeModel, @PathVariable("id") Long id){
-        employeeModel.setId(id);
-        model.addAttribute("employeeModel", employeeClient.update(employeeModel, id)
+    public String editEmployeeSubmit(Model model, @ModelAttribute EmployeeModel employee, @PathVariable("id") Long id){
+        employee.setId(id);
+        model.addAttribute("employee", employeeClient.update(employee, id)
                         .onErrorReturn(WebClientResponseException.BadRequest.class, new EmployeeModel(true, "Name, skill and salary must be filled!"))
                         .onErrorReturn(WebClientResponseException.UnprocessableEntity.class, new EmployeeModel(true, "Assigned jobs are not valid!")));
 

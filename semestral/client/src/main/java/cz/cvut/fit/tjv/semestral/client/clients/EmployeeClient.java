@@ -11,6 +11,9 @@ import reactor.core.publisher.Mono;
 @Component
 public class EmployeeClient {
     private final WebClient employeeWebClient;
+
+    private static final String ONE_URI = "/{id}";
+
     public EmployeeClient(){
         employeeWebClient = WebClient.create("http://localhost:8080/employees");
     }
@@ -24,9 +27,7 @@ public class EmployeeClient {
 
     public Mono<EmployeeModel> fetchOneEmployee(Long id){
         return employeeWebClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/{id}")
-                        .build(id))
+                .uri(ONE_URI, id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(EmployeeModel.class);
@@ -44,9 +45,7 @@ public class EmployeeClient {
 
     public Mono<EmployeeModel> update(EmployeeModel newEmployee, Long id){
         return employeeWebClient.put()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/{id}")
-                        .build(id))
+                .uri(ONE_URI, id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(newEmployee)

@@ -11,7 +11,7 @@
 <div class="div-top">
     <h1 class="h1-left">Work Manager: Employee Editing</h1>
 </div>
-<form class="form" method = "post" action="#" th:action="@{/employees/edit}" th:object="${employeeModel}" >
+<form class="form" method = "post" action="#" th:object="${employee}" th:action="@{/employees/{id}/edit(id=${employee.id})}">
     <div class="alert alert-danger" th:if="*{error}">
         <p th:text="*{name}">Unknown error, please contact support</p>
     </div>
