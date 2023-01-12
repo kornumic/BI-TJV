@@ -18,6 +18,19 @@ public class EmployeeModel {
 
     public EmployeeModel() {
     }
+    public EmployeeModel(EmployeeModel employee, Boolean error, String message) {
+        this.id = employee.id;
+        this.name = employee.name;
+        this.salary = employee.salary;
+        this.dateOfBirth = employee.dateOfBirth;
+        this.address = employee.address;
+        this.skill = employee.skill;
+        this.myJobs = employee.myJobs;
+
+        this.error = error;
+        this.message = message;
+    }
+
     public EmployeeModel(Boolean error, String message) {
         this.error = error;
         this.message = message;

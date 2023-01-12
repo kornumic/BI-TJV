@@ -2,6 +2,7 @@ package cz.cvut.fit.tjv.semestral.client.clients;
 
 import cz.cvut.fit.tjv.semestral.client.model.EmployeeModel;
 import cz.cvut.fit.tjv.semestral.client.model.JobModel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,8 +15,8 @@ public class EmployeeClient {
 
     private static final String ONE_URI = "/{id}";
 
-    public EmployeeClient(){
-        employeeWebClient = WebClient.create("http://localhost:8080/employees");
+    public EmployeeClient(@Value("http://localhost:8080") String backendUrl){
+        employeeWebClient = WebClient.create(backendUrl + "/employees");
     }
 
     public Flux<EmployeeModel> fetchAllEmployees(){
@@ -43,12 +44,11 @@ public class EmployeeClient {
     }
 
 
-    public Mono<EmployeeModel> update(EmployeeModel newEmployee, Long id){
+    public Mono<EmployeeModel> update(EmployeeModel employee, Long id){
         return employeeWebClient.put()
                 .uri(ONE_URI, id)
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .bodyValue(newEmployee)
+                .bodyValue(employee)
                 .retrieve()
                 .bodyToMono(EmployeeModel.class);
     }
