@@ -17,6 +17,17 @@ public class JobModel {
         this.message = message;
     }
 
+    public JobModel(JobModel jobModel, Boolean error, String message) {
+        this.id = jobModel.id;
+        this.name = jobModel.name;
+        this.difficulty = jobModel.difficulty;
+        this.time = jobModel.time;
+        this.finished = jobModel.finished;
+
+        this.error = error;
+        this.message = message;
+    }
+
     public Boolean getError() {
         return error;
     }

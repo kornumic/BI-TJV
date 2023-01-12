@@ -2,6 +2,7 @@ package cz.cvut.fit.tjv.semestral.client.clients;
 
 
 import cz.cvut.fit.tjv.semestral.client.model.JobModel;
+import cz.cvut.fit.tjv.semestral.client.model.JobModel;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 public class JobClient {
     private final WebClient jobWebClient;
 
+    private static final String ONE_URI = "/{id}";
     public JobClient(){
         jobWebClient = WebClient.create("http://localhost:8080/jobs");
     }
@@ -23,12 +25,12 @@ public class JobClient {
                 .bodyToFlux(JobModel.class);
     }
 
-    public Flux<JobModel> fetchOneJob(Long id){
+    public Mono<JobModel> fetchOneJob(Long id){
         return jobWebClient.get()
                 .uri("/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(JobModel.class);
+                .bodyToMono(JobModel.class);
     }
 
     public Mono<JobModel> create(JobModel newJob){
@@ -39,4 +41,22 @@ public class JobClient {
                 .retrieve()
                 .bodyToMono(JobModel.class);
     }
+
+
+    public Mono<JobModel> update(JobModel job, Long id){
+        return jobWebClient.put()
+                .uri(ONE_URI, id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(job)
+                .retrieve()
+                .bodyToMono(JobModel.class);
+    }
+
+    public Mono<Void> delete(Long id) {
+        return jobWebClient.delete() // HTTP DELETE
+                .uri(ONE_URI, id) // URI
+                .retrieve() // request specification finished
+                .bodyToMono(Void.TYPE);
+    }
+
 }

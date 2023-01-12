@@ -44,18 +44,15 @@ public class EmployeeWebController {
     @PostMapping("/employees/add")
     public String addEmployeeSubmit(Model model, @ModelAttribute EmployeeModel employeeModel){
         model.addAttribute("employeeModel", employeeClient.create(employeeModel)
-                        .onErrorReturn(WebClientResponseException.BadRequest.class, new EmployeeModel(employeeModel, true, "Name, skill and salary must be filled!"))
-                        .onErrorReturn(WebClientResponseException.UnprocessableEntity.class, new EmployeeModel(employeeModel, true, "Assigned jobs are not valid!")));
+                        .onErrorReturn(WebClientResponseException.BadRequest.class, new EmployeeModel(true, "Name, skill and salary must be filled!"))
+                        .onErrorReturn(WebClientResponseException.UnprocessableEntity.class, new EmployeeModel(true, "Assigned jobs are not valid!")));
 
         return "employeeAdd";
     }
 
     @GetMapping("/employees/{id}/edit")
     public String editEmployeeGet(Model model, @PathVariable("id") Long id) {
-        Mono<EmployeeModel> employee = employeeClient.fetchOneEmployee(id);
-//        model.addAttribute("employeeModel", employeeClient.fetchOneEmployee(id));
-//        model.addAttribute(new EmployeeModel());
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", employeeClient.fetchOneEmployee(id));
         return "employeeEdit";
     }
 
