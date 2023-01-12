@@ -32,5 +32,32 @@
         <p th:text="'Finished:      '+${job.finished}">    Skill:           0</p>
     </div>
 </div>
+<div class = "float-jobs-container">
+    <div class = "float-jobs-child">
+        <div class = "my-jobs">
+            <h3>Assignable employees</h3>
+            <table class = "table">
+                <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Salary</td>
+                    <td>Date of Birth</td>
+                    <td>Address</td>
+                    <td>Skill</td>
+
+                </tr>
+                </thead>
+                <tbody th:each="employee : ${employees}">
+                <td th:text="${employee.name}">Name</td>
+                <td th:text="${employee.salary}">Salary</td>
+                <td th:text="${employee.dateOfBirth}">Date of Birth</td>
+                <td th:text="${employee.address}">Address</td>
+                <td th:text="${employee.skill}">Skill</td>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

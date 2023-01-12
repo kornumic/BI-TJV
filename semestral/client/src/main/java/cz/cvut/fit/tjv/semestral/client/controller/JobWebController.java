@@ -1,5 +1,6 @@
 package cz.cvut.fit.tjv.semestral.client.controller;
 
+import cz.cvut.fit.tjv.semestral.client.clients.EmployeeClient;
 import cz.cvut.fit.tjv.semestral.client.clients.JobClient;
 import cz.cvut.fit.tjv.semestral.client.model.JobModel;
 import cz.cvut.fit.tjv.semestral.client.model.JobModel;
@@ -17,9 +18,11 @@ import java.util.ArrayList;
 @Controller
 public class JobWebController {
     private final JobClient jobClient;
+    private final EmployeeClient employeeClient;
 
-    public JobWebController(JobClient jobClient) {
+    public JobWebController(JobClient jobClient, EmployeeClient employeeClient) {
         this.jobClient = jobClient;
+        this.employeeClient = employeeClient;
     }
 
     @GetMapping("/jobs")
@@ -37,7 +40,8 @@ public class JobWebController {
 
     @GetMapping("/jobs/{id}")
     public String jobInfo(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("job", jobClient.fetchOneJob(id));
+        model.addAttribute("job", jobClient.fetchOneJob(id))
+                .addAttribute("employees", employeeClient.fetchAllFreeEmployees());
         return "job";
     }
 

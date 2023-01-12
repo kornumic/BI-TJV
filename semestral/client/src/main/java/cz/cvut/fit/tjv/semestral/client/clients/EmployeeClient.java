@@ -27,6 +27,15 @@ public class EmployeeClient {
                 .retrieve()
                 .bodyToFlux(EmployeeModel.class);
     }
+    public Flux<EmployeeModel> fetchAllFreeEmployees(){
+        return employeeWebClient.get()
+                .uri(uriBuilder -> uriBuilder
+                     .queryParam("assignable", true)
+                     .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToFlux(EmployeeModel.class);
+    }
 
     public Mono<EmployeeModel> fetchOneEmployee(Long id){
         return employeeWebClient.get()
