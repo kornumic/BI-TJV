@@ -22,12 +22,14 @@ public class EmployeeClient {
                 .bodyToFlux(EmployeeModel.class);
     }
 
-    public Flux<EmployeeModel> fetchOneEmployee(Long id){
+    public Mono<EmployeeModel> fetchOneEmployee(Long id){
         return employeeWebClient.get()
-                .uri("/{id}", id)
+                .uri(uriBuilder -> uriBuilder
+                        .path("/{id}")
+                        .build(id))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(EmployeeModel.class);
+                .bodyToMono(EmployeeModel.class);
     }
 
     public Mono<EmployeeModel> create(EmployeeModel newEmployee){
@@ -39,9 +41,12 @@ public class EmployeeClient {
                 .bodyToMono(EmployeeModel.class);
     }
 
+
     public Mono<EmployeeModel> update(EmployeeModel newEmployee, Long id){
         return employeeWebClient.put()
-                .uri("/{id}", id)
+                .uri(uriBuilder -> uriBuilder
+                        .path("/{id}")
+                        .build(id))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(newEmployee)

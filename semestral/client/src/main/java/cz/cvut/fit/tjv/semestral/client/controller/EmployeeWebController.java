@@ -25,6 +25,14 @@ public class EmployeeWebController {
         return "employees";
     }
 
+    @GetMapping("/employees/{id}")
+    public String employeeInfo(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("employee", employeeClient.fetchOneEmployee(id).onErrorReturn(new EmployeeModel(true, "Employee not found")))
+                .addAttribute("assignableJobs", jobClient.fetchAllJobs());
+
+        return "employee";
+    }
+
     @GetMapping("/employees/add")
     public String addEmployeeGet(Model model) {
         model.addAttribute("employeeModel", new EmployeeModel());
@@ -33,36 +41,29 @@ public class EmployeeWebController {
 
     @PostMapping("/employees/add")
     public String addEmployeeSubmit(Model model, @ModelAttribute EmployeeModel employeeModel){
-        model.addAttribute("employeeModel",
-                employeeClient.create(employeeModel)
+        model.addAttribute("employeeModel", employeeClient.create(employeeModel)
                         .onErrorReturn(WebClientResponseException.BadRequest.class, new EmployeeModel(true, "Name, skill and salary must be filled!"))
                         .onErrorReturn(WebClientResponseException.UnprocessableEntity.class, new EmployeeModel(true, "Assigned jobs are not valid!")));
 
         return "employeeAdd";
     }
 
-    @GetMapping("/employees/edit")
-    public String editEmployeeGet(Model model) {
-        model.addAttribute("employeeModel", new EmployeeModel());
+    @GetMapping("/employees/{id}/edit")
+    public String editEmployeeGet(Model model, @PathVariable("id") Long id) {
+        //EmployeeModel employee = employeeClient.fetchOneEmployee(id);
+//        model.addAttribute("employeeModel", employeeClient.fetchOneEmployee(id));
+        model.addAttribute(new EmployeeModel());
         return "employeeEdit";
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/employees/{id}/edit")
     public String editEmployeeSubmit(Model model, @ModelAttribute EmployeeModel employeeModel, @PathVariable("id") Long id){
-        model.addAttribute("employeeModel",
-                employeeClient.update(employeeModel, id)
+        employeeModel.setId(id);
+        model.addAttribute("employeeModel", employeeClient.update(employeeModel, id)
                         .onErrorReturn(WebClientResponseException.BadRequest.class, new EmployeeModel(true, "Name, skill and salary must be filled!"))
                         .onErrorReturn(WebClientResponseException.UnprocessableEntity.class, new EmployeeModel(true, "Assigned jobs are not valid!")));
 
-        return "employee";
-    }
-
-    @GetMapping("/employees/{id}")
-    public String employeeInfo(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("employee", employeeClient.fetchOneEmployee(id))
-             .addAttribute("assignableJobs", jobClient.fetchAllJobs());
-
-        return "employee";
+        return "employeeEdit";
     }
 
 //    @PutMapping("/employees/{id_employee}/assign/{id_job}")
