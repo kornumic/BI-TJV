@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="div-top">
-    <h1 class="h1-left" > Work Manager: </h1>
+    <h1 class="h1-left" ><a class="wm-link" href="/workmanager" > Work Manager </a></h1>
 </div>
 
 <div class="edit">
@@ -23,7 +23,7 @@
 <div>
     <h2>Employee INFO:</h2>
     <div>
-        <img th:src="@{/images/person.png}" src="../static/images/person.png" alt="Default photo of person">
+        <img class="icon" th:src="@{/images/person.png}" src="../static/images/person.png" alt="Default photo of person">
     </div>
     <div class="info">
         <p th:text="'Employee Id:   '+${employee.id}">         Employee Id:      0</p>

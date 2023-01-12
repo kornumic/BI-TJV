@@ -9,6 +9,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+
 @Component
 public class EmployeeClient {
     private final WebClient employeeWebClient;
@@ -35,6 +37,8 @@ public class EmployeeClient {
     }
 
     public Mono<EmployeeModel> create(EmployeeModel newEmployee){
+        if(newEmployee.getMyJobs() == null)
+            newEmployee.setMyJobs(new ArrayList<>());
         return employeeWebClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)

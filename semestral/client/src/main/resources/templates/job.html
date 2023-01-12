@@ -8,54 +8,29 @@
 </head>
 <body>
 <div class="div-top">
-    <h1 class="h1-left" th:field="'Work manager'+job.name">Work Manager: Job name</h1>
+    <h1 class="h1-left" th:field="'Work manager'+job.name"><a class="wm-link" href="/workmanager"> Work Manager: Job name</a></h1>
+</div>
+<div class="edit">
+    <a th:href="'/jobs/'+${job.id}+'/edit'">
+        <button class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+            </svg>
+        </button>
+    </a>
 </div>
 <div>
     <h2>Job INFO:</h2>
+    <div>
+        <img class="icon" th:src="@{/images/job.png}" src="../static/images/job.png" alt="Default photo of person">
+    </div>
+    <div class="info">
+        <p th:text="'Job Id:        '+${job.id}">          Job ID:          0</p>
+        <p th:text="'Name:          '+${job.name}">        Name:            null</p>
+        <p th:text="'Difficulty:    '+${job.difficulty}">  Difficulty:      null</p>
+        <p th:text="'Time:          '+${job.time}">        Address:         null</p>
+        <p th:text="'Finished:      '+${job.finished}">    Skill:           0</p>
+    </div>
 </div>
-<!--<div class = "float-jobs-container">-->
-<!--    <div class = "float-jobs-child">-->
-<!--        <div class = "my-jobs">-->
-<!--            <h3>Assigned jobs</h3>-->
-<!--            <table class = "table">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <td>Name</td>-->
-<!--                    <td>Difficulty</td>-->
-<!--                    <td>Time</td>-->
-<!--                    <td>Finished</td>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody th:each="myJob : ${job.myJobs}">-->
-<!--                <td th:text="${myJob.name}">Name</td>-->
-<!--                <td th:text="${myJob.difficulty}">Difficulty</td>-->
-<!--                <td th:text="${myJob.time}">Time</td>-->
-<!--                <td th:text="${myJob.finished}">Is finished</td>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class = "float-jobs-child">-->
-<!--        <div class = "assignable-jobs">-->
-<!--            <h3>Assignable jobs</h3>-->
-<!--            <table class = "table">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <td>Name</td>-->
-<!--                    <td>Difficulty</td>-->
-<!--                    <td>Time</td>-->
-<!--                    <td>Finished</td>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                &lt;!&ndash;                <tbody th:each="assignableJob : ${assignableJobs}">&ndash;&gt;-->
-<!--                &lt;!&ndash;                <td th:text="${assignableJob.name}">Name</td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                <td th:text="${assignableJob.difficulty}">Difficulty</td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                <td th:text="${assignableJob.time}">Time</td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                <td th:text="${assignableJob.finished}">Is finished</td>&ndash;&gt;-->
-<!--                &lt;!&ndash;                </tbody>&ndash;&gt;-->
-<!--            </table>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 </body>
 </html>

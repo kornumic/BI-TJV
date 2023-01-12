@@ -12,17 +12,16 @@
 </div>
 <div class="question" >
     <div class="alert alert-warning alert-question">
-        <p>WARNING: Are you sure you want to delete the employee?</p>
+        <p>WARNING: Are you sure you want to delete the job?</p>
     </div>
     <div class="side-buttons">
-        <form class="left-button" method = "post" action="#" th:action="@{/employees/{id}/delete(id=${id})}">
+        <form class="left-button" method = "post" action="#" th:action="@{/jobs/{id}/delete(id=${id})}">
             <input type="submit" class="btn btn-primary" value="YES">
         </form>
         <div class="right-button">
-            <p><a  href="/employees"><button class="btn btn-primary">NO</button></a></p>
+            <p><a  href="/jobs"><button class="btn btn-primary">NO</button></a></p>
         </div>
     </div>
 </div>
-
 </body>
 </html>

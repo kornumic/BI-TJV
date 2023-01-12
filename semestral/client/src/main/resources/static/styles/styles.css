@@ -63,7 +63,6 @@ background: #F0FDF0;
 }
 .my-jobs{
     width: 90%;
-
     padding: 10px;
 }
 
@@ -131,5 +130,43 @@ background: #F0FDF0;
 }
 
 .info{
-    margin-left: 50px;
+    margin: 50px;
+}
+
+.wm-link{
+    color: black;
+    underline: none;
+}
+
+
+a.wm-link:link{
+    text-decoration: none;
+}
+
+a.wm-link:visited{
+    text-decoration: none;
+}
+
+a.wm-link:hover{
+    transition: dimgray 2s ease-out;
+    color: dimgray;
+    text-decoration: none;
+}
+
+a.wm-link:active{
+    text-decoration: none;
+}
+
+.box{
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+
+.icon{
+    margin-top: 50px;
+    margin-right: 100px;
+    float: right;
+    width: 20%;
+    max-width: 225px;
 }

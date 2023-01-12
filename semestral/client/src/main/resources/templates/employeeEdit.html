@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="div-top">
-    <h1 class="h1-left">Work Manager: Employee Editing</h1>
+    <h1 class="h1-left"><a class="wm-link" href="/workmanager"> Work Manager: Employee Editing</a></h1>
 </div>
 <form class="form" method = "post" action="#" th:object="${employee}" th:action="@{/employees/{id}/edit(id=${employee.id})}">
     <div class="alert alert-danger" th:if="*{error}">

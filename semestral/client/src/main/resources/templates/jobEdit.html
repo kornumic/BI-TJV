@@ -10,7 +10,7 @@
 <div class="div-top">
     <h1 class="h1-left"><a class="wm-link" href="/workmanager"> Work Manager: Employee registration</a></h1>
 </div>
-<form class="form" method = "post" action="#" th:action="@{/jobs/add}" th:object="${jobModel}" >
+<form class="form" method = "post" action="#" th:action="@{/jobs/{id}/edit(id=${job.id})}" th:object="${job}" >
     <div class="alert alert-danger" th:if="*{error}">
         <p th:text="*{message}">Unknown error, please contact support</p>
     </div>
@@ -34,6 +34,6 @@
         <input type="submit" class="btn btn-primary" >
     </div>
 </form>
-<p><a href="/jobs"><button class="btn btn-primary">Back to all jobs</button></a></p>
+<p><a th:href="'/jobs/'+${id}"><button class="btn btn-primary">Back</button></a></p>
 </body>
 </html>
