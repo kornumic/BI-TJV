@@ -102,10 +102,7 @@ background: #F0FDF0;
 }
 
 .form-line{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 5px 15px;
 
 }
 
@@ -130,7 +127,7 @@ background: #F0FDF0;
 }
 
 .info{
-    margin: 50px;
+    margin: 50px 50px 150px;
 }
 
 .wm-link{

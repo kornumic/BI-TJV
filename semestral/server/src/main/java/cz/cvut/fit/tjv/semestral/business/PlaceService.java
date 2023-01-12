@@ -21,6 +21,9 @@ public class PlaceService extends AbstractCrudService<Place, Long> {
 
     @Override
     public Place create(Place entity) throws EntityStateException{
+        if(((PlaceJpaRepository)repository).existsByAddress(entity.getAddress())){
+            throw new EntityStateException("Job with this name already exists!");
+        }
         var jobs = entity.getJobsInPlace();
         for(Job job : jobs){
             if(!jobService.checkEntityValid(job))
@@ -31,6 +34,9 @@ public class PlaceService extends AbstractCrudService<Place, Long> {
 
     @Override
     public Place update(Place entity) throws EntityStateException {
+        if(((PlaceJpaRepository)repository).existsByAddress(entity.getAddress())){
+            throw new EntityStateException("Job with this name already exists!");
+        }
         var jobs = entity.getJobsInPlace();
         for(Job job : jobs){
             if(!jobService.checkEntityValid(job))
