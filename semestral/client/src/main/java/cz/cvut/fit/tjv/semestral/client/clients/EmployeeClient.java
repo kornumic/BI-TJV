@@ -53,6 +53,13 @@ public class EmployeeClient {
                 .bodyToMono(EmployeeModel.class);
     }
 
+    public Mono<Void> delete(Long id) {
+        return employeeWebClient.delete() // HTTP DELETE
+                .uri(ONE_URI, id) // URI
+                .retrieve() // request specification finished
+                .bodyToMono(Void.TYPE);
+    }
+
 //    public Mono<EmployeeModel> assignJob(EmployeeModel employeeModel, Long idJob) {
 //        return
 //

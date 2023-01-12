@@ -71,6 +71,21 @@ public class EmployeeWebController {
         return "employeeEdit";
     }
 
+    @GetMapping("/employees/{id}/delete")
+    public String deleteEmployeeAsk(Model model, @PathVariable("id") Long id){
+        model.addAttribute("id", id);
+
+        return "employeeDelete";
+    }
+
+    @PostMapping("/employees/{id}/delete")
+    public String deleteEmployee(Model model, @PathVariable("id") Long id){
+        model.addAttribute("deleted", employeeClient.delete(id))
+             .addAttribute("employees", employeeClient.fetchAllEmployees());
+
+        return "redirect:/employees";
+    }
+
 //    @PutMapping("/employees/{id_employee}/assign/{id_job}")
 //    public String assignJob(Model model, @PathVariable("id_employee") Long idEmployee, @PathVariable("id_job") Long idJob){
 //        model.addAttribute("employee", employeeClient.assignJob(idJob))

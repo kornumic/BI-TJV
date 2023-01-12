@@ -1,6 +1,4 @@
-/*p{*/
-/*    margin-left: 50px;*/
-/*}*/
+
 
 h2{
     margin-left: 50px;
@@ -83,6 +81,11 @@ background: #F0FDF0;
     width: 90%
 }
 
+.alert-question{
+    margin: 10px;
+    padding: 10px;
+}
+
 .form{
     border: 1px solid lightgrey;
     border-radius: 7px;
@@ -90,6 +93,13 @@ background: #F0FDF0;
     width: 50%;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.question{
+    text-align: center;
+    padding-top: 10%;
+    margin: auto;
+    width: 50%;
 }
 
 .form-line{
@@ -102,7 +112,7 @@ background: #F0FDF0;
 
 .side-buttons{
     /*margin: 10px;*/
-    padding: 40px;
+    padding: 60px;
 }
 
 .right-button{
