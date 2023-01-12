@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Component
@@ -22,6 +23,10 @@ public class EmployeeService extends AbstractCrudService<Employee, Long> {
     @Override
     public Employee create(Employee entity) throws EntityStateException{
         var jobs = entity.getMyJobs();
+        if(jobs == null){
+            entity.setMyJobs(new ArrayList<Job>());
+            return repository.save(entity);
+        }
         for(Job job : jobs){
             if(!jobService.checkEntityValid(job))
                 throw new EntityStateException("Job \"" + job.getName() + "\" is not valid");
@@ -31,6 +36,11 @@ public class EmployeeService extends AbstractCrudService<Employee, Long> {
 
     public Employee update(Employee entity) throws EntityStateException {
         var jobs = entity.getMyJobs();
+        if(jobs == null){
+            entity.setMyJobs(new ArrayList<Job>());
+            return super.update(entity);
+        }
+
         for(Job job : jobs){
             if(!jobService.checkEntityValid(job))
                 throw new EntityStateException("Job \"" + job.getName() + "\" is not valid");

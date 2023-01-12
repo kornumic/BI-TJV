@@ -27,6 +27,9 @@ public class EmployeeToEntityConverter implements Function<EmployeeDto, Employee
 
     private Collection<Job> convertMyJobs(Collection<JobDto> myJobs){
         Collection<Job> myEntityJobs = new ArrayList<Job>();
+        if(myJobs == null)
+            return myEntityJobs;
+
         for (JobDto jobDto : myJobs) {
             myEntityJobs.add(jobConverter.apply(jobDto));
         }

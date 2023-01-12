@@ -32,6 +32,8 @@ public class Employee implements DomainEntity<Long>{
     public Employee(Long id, String name, Long salary, LocalDate dateOfBirth, String address, Long skill) {
         this(id);
         this.name = Objects.requireNonNull(name);
+        if(this.name.isEmpty())
+            throw new NullPointerException();
         this.salary = Objects.requireNonNull(salary);
         this.dateOfBirth = dateOfBirth;
         this.address = address;

@@ -22,6 +22,14 @@ public class JobService extends AbstractCrudService<Job, Long>{
         return super.create(entity);
     }
 
+    @Override
+    public Job update(Job entity) {
+        if(((JobJpaRepository)repository).existsByName(entity.getName())){
+            throw new EntityStateException("Job with this name already exists!");
+        }
+        return super.update(entity);
+    }
+
     public boolean checkEntityValid(Job job) {
         var jobFromDb = readById(job.getId());
         return jobFromDb.isPresent() && job.equals(jobFromDb.get());
